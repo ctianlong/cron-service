@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.system.cron.dao.TaskDao">
+  <!-- 启用二级缓存 -->
+  <cache />
+  <resultMap id="BaseResultMap" type="com.system.cron.entity.Task">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="cron_expression" jdbcType="VARCHAR" property="cronExpression" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="request_type" jdbcType="INTEGER" property="requestType" />
+    <result column="request_data" jdbcType="VARCHAR" property="requestData" />
+    <result column="is_enabled" jdbcType="INTEGER" property="enabled" />
+    <result column="create_time" jdbcType="BIGINT" property="createTime" typeHandler="com.system.cron.util.mybatis.typehandler.BigintDateTypeHandler" />
+    <result column="modified_time" jdbcType="BIGINT" property="modifiedTime" typeHandler="com.system.cron.util.mybatis.typehandler.BigintDateTypeHandler" />
+  </resultMap>
+
+  <select id="count" resultType="_int">
+    SELECT count(*) FROM tbl_task
+  </select>
+
+  <update id="updateIsEnabledById">
+    UPDATE
+      tbl_task
+    SET
+      is_enabled = #{enabled,jdbcType=INTEGER},
+      modified_time = #{modifiedTime,jdbcType=BIGINT,typeHandler=com.system.cron.util.mybatis.typehandler.BigintDateTypeHandler}
+    WHERE
+      id = #{id}
+  </update>
+
+  <select id="listAllTaskByIsEnabled" resultMap="BaseResultMap">
+    SELECT
+      id,
+      cron_expression,
+      url,
+      request_type,
+      request_data
+    FROM
+      tbl_task
+    WHERE
+      is_enabled = #{enabled,jdbcType=INTEGER}
+  </select>
+
+  <!-- 全量更新，null或空字符串值会被更新，数据库字段非空约束需要调用层自己保证 -->
+  <update id="updateById" parameterType="com.system.cron.entity.Task" >
+    UPDATE
+      tbl_task
+    SET
+      name = #{name,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      cron_expression = #{cronExpression,jdbcType=VARCHAR},
+      url = #{url,jdbcType=VARCHAR},
+      request_type = #{requestType,jdbcType=INTEGER},
+      request_data = #{requestData,jdbcType=VARCHAR},
+      is_enabled = #{enabled,jdbcType=INTEGER},
+      modified_time = #{modifiedTime,jdbcType=BIGINT,typeHandler=com.system.cron.util.mybatis.typehandler.BigintDateTypeHandler}
+    WHERE
+      id = #{id,jdbcType=BIGINT}
+  </update>
+
+</mapper>
