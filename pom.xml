@@ -26,16 +26,10 @@
 	</properties>
 
 	<repositories>
-        <repository>
-			<id>central1</id>
-			<url>http://repo1.maven.org/maven2</url>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-        </repository>
+        <!--<repository>-->
+			<!--<id>central1</id>-->
+			<!--<url>http://repo1.maven.org/maven2</url>-->
+        <!--</repository>-->
         <repository>
             <id>cse1</id>
             <url>http://maven.huaweicse.com/nexus/content/groups/public/</url>
@@ -43,15 +37,13 @@
     </repositories>
 
     <pluginRepositories>
+	    <!--<pluginRepository>-->
+			<!--<id>central1</id>-->
+			<!--<url>http://repo1.maven.org/maven2</url>-->
+	    <!--</pluginRepository>-->
 	    <pluginRepository>
-			<id>central1</id>
-			<url>http://repo1.maven.org/maven2</url>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
+			<id>cse1</id>
+			<url>http://maven.huaweicse.com/nexus/content/groups/public/</url>
 	    </pluginRepository>
 	</pluginRepositories>
 
