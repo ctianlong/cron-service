@@ -27,7 +27,7 @@ public class SystemJobs
 
     public static final long ONE_MINUTE = 60 * 1000;
 
-    public static final long QUARTER_HOUR = 15 * 60 * 1000;
+    public static final long ONE_HOUR = 60 * 60 * 1000;
 
     public static final long HALF_HOUR = 30 * 60 * 1000;
 
@@ -48,7 +48,7 @@ public class SystemJobs
     /**
      * 任务哨兵，定时检查数据库任务状态与程序实际任务运行状态，使其保持一致
      */
-    @Scheduled(initialDelay = HALF_HOUR, fixedRate = HALF_HOUR)
+    @Scheduled(initialDelay = ONE_HOUR, fixedRate = ONE_HOUR)
     public void taskSentinel()
     {
         try
